@@ -11,7 +11,7 @@ const { Diet, Recipe } = require("../db");
 
 const router = Router();
 
-//router.use(express.json());
+//router.use(express.json()); 
 
 // router.use("/recipes",recipesRoute)
 //router.use("/types",dietsRoute)
@@ -20,7 +20,7 @@ const router = Router();
 router.get('/recipes', async (req, res) => {
   let { name } = req.query;
   let allRecipes = await getAllInfo();
-  console.log('llamada a la api',allRecipes)
+  //console.log('llamada a la api',allRecipes)
   try {
     if (name) {
       let searchRecipe = await allRecipes.filter((el) =>
@@ -37,7 +37,19 @@ router.get('/recipes', async (req, res) => {
   }
 });
 
-// ruta para obtener una receta por id
+//ruta para obtener una receta por id
+router.get("/recipes/:id", async (req, res) => {
+  let {id} = req.params;
+  let recipeTotal = await getAllInfo()
+  if(id){
+    let recipeId = await recipeTotal.filter(el => el.id == id)
+    recipeId.length?
+    res.status(200).json(recipeId):
+    res.status(400).send('no hay esa receta')
+
+    }
+
+})
 
 
 // ruta para obtener los tipos de dietas get/tipes
@@ -70,11 +82,51 @@ try {
  } catch (error) {
  res.send(error)
 }
-
 } )
 
 
 
+// ruta para publicar la receta por el usuario 
+
+router.post("/recipe", async (req, res) => {
+  let { name, summary, spoonacularScore, healthScore, instructions, diets } = req.body;
+  try {
+    let newRecipe = await Recipe.findOrCreate({
+      name,
+      summary,
+      spoonacularScore,
+      healthScore,
+      instructions,
+    });
+    let recipeDiet = await Diet.findAll({ where: { name: diets } });
+    newRecipe.addDiet(recipeDiet);
+    res.send("Nueva Receta creada con éxito!");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// router.post("/create", async (req,res,next) => {
+//   try {
+//       const {title, summary, spoonacularScore, healthScore, instructions, image, diets} = req.body
+
+//       const newRecipe = await Recipe.create({
+//           title,
+//           summary,
+//           spoonacularScore,
+//           healthScore,
+//           instructions,
+//           image
+//       })
+
+//       let recipeDiet = await Diet.findAll({ where: { name: diets } });
+//     newRecipe.addDiet(recipeDiet);
+//     res.send("Nueva Receta creada con éxito!");
+
+//   } catch (error) {
+//       next(error)
+//   }
+// })
 
 
 module.exports = router;
