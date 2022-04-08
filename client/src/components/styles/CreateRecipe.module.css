@@ -1,0 +1,79 @@
+:root{
+    --mint-cream: #F1F7ED;
+    --msu-green: #243E36;
+    --forest-green-crayola: #7CA982;
+}
+.container {
+    background-color: var(--forest-green-crayola);
+    padding-bottom: 3vw;
+    animation: display 1s ease 0s 1 normal forwards;
+}
+.title {
+    color: var(--mint-cream);
+    font-size: 5vw;
+}
+.navbar {
+    margin: 3vw 5vw ;
+}
+.btns {
+    border-radius: 10px;
+    padding: .5vw 1.5vw;
+    border: solid 0.3vw black;
+    font-size: 1.8vw;
+    font-weight: bold;
+    color: black;
+    background-color: var(--mint-cream);
+}
+.btns:hover {
+    cursor: pointer;
+    transition: .5s;
+    color: var(--mint-cream);
+    background-color: var(--forest-green-crayola);
+    box-shadow: 9px 13px 21px 1px #141010;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputContainer {
+    display: grid;
+    grid-template-columns: 20vw 20vw;
+    margin: 3vw
+}
+.inputContainer label {
+    font-size: 2vw;
+    font-weight:bold;
+    color: var(--mint-cream);
+}
+.dietsContainer {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    margin: 3vw;
+}
+.dietsContainer label {
+    font-size: 2vw;
+    font-weight:bold;
+    color: var(--mint-cream);
+    margin: .5vw;
+}
+.dietsOptions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.dietsOptions label{
+    font-weight: normal;
+}
+@keyframes display {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+      
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

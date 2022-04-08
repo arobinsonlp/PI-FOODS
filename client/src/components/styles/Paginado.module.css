@@ -1,0 +1,33 @@
+:root{
+    --mint-cream: #F1F7ED;
+    --msu-green: #243E36;
+    --forest-green-crayola: #7CA982;
+}
+.container {
+    display: flex;
+    align-self: center;
+}
+.listContainer {
+    display: flex;
+   list-style-type: none; 
+   flex-direction: row;
+}
+.items {
+    float: left;
+}
+.number {
+    border-radius: 10px;
+    padding: 1vw 2vw;
+    border: solid 0.3vw black;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: black;
+    background-color: var(--mint-cream);
+}
+.number:hover {
+    cursor: pointer;
+    transition: .5s;
+    color: var(--mint-cream);
+    background-color: var(--forest-green-crayola);
+    box-shadow: 9px 13px 21px 1px #141010;
+}
